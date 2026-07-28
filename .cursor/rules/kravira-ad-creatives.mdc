@@ -19,11 +19,21 @@ alwaysApply: true
 
 - Весь текст на баннерах и в ad copy: **Montserrat** и его вариации.
 - Файлы шрифтов: `assets/fonts/Montserrat-*.ttf`.
+- Перед рендером проверять `font.getname()` → family должна быть `Montserrat` (см. `scripts/build_ad_banners.py`).
 - Рекомендуемые начертания:
-  - заголовки: `Montserrat ExtraBold` / `Bold`
-  - подзаголовки и плашки: `Montserrat SemiBold` / `Medium`
-  - мелкий текст: `Montserrat Regular` / `Light`
+  - тёмный блок заголовка: `Montserrat ExtraBold`
+  - белый блок: `Montserrat Bold`
+  - CTA-плашка: `Montserrat SemiBold`
+  - мелкий текст: `Montserrat Medium` / `Regular` / `Light`
 - Не использовать Arial/Helvetica/system default для креативов Кравира.
+
+## Композиция баннера (как в референсах Осипенко/Баценко)
+
+- Слева текстовая колонка: сначала тёмный блок (2 строки), отступ, затем белый блок (2 строки), затем одна pill-CTA.
+- Справа врач без «рваного» rembg-края и без кусков старого текста на cutout.
+- Телефон: иконка трубки из `image/brand/phone_icon.png` + `403` Montserrat ExtraBold (не рисовать трубку вручную).
+- Логотип один раз, прозрачный, справа сверху.
+- Не оставлять «призраки» старых текстов/лого с референсного баннера.
 
 ## Тире
 
