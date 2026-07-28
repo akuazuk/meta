@@ -13,7 +13,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = Path.home() / ".cursor/projects/Users-pavelkuzauka-Cursor-Folders-Meta/assets"
@@ -58,19 +58,42 @@ def resolve_source(candidates: list[Path]) -> Path:
 
 
 def cover_logo(im: Image.Image) -> Image.Image:
-    w, h = im.size
-    sample = np.array(im.crop((int(w * 0.52), int(h * 0.03), int(w * 0.66), int(h * 0.14))))
-    mint = tuple(int(x) for x in sample.mean(axis=(0, 1))[:3])
-    ImageDraw.Draw(im).rectangle((int(w * 0.695), 0, w, int(h * 0.32)), fill=mint)
-    ov = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    od = ImageDraw.Draw(ov)
-    for x, y, r, a in [
-        (int(w * 0.84), int(h * 0.11), 55, 28),
-        (int(w * 0.93), int(h * 0.23), 42, 18),
-        (int(w * 0.76), int(h * 0.18), 34, 14),
-    ]:
-        od.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 255, a))
-    return Image.alpha_composite(im.convert("RGBA"), ov).convert("RGB")
+    """Remove the AI logo without leaving a rectangular backing.
+
+    Fit a smooth colour plane to clean nearby background pixels and blend it
+    over the complete old-logo area. Only the outer six pixels are feathered,
+    so neither the original wordmark nor a hard-edged patch remains.
+    """
+    source = np.array(im.convert("RGB"), dtype=float)
+    h, w, _ = source.shape
+    points: list[list[float]] = []
+    colours: list[np.ndarray] = []
+
+    for y in range(0, int(h * 0.27), 3):
+        for x in range(int(w * 0.48), int(w * 0.62), 3):
+            points.append([x / w, y / h, 1.0])
+            colours.append(source[y, x])
+    for y in range(0, int(h * 0.025), 2):
+        for x in range(int(w * 0.25), int(w * 0.98), 3):
+            points.append([x / w, y / h, 1.0])
+            colours.append(source[y, x])
+
+    coefficients = np.linalg.lstsq(
+        np.asarray(points), np.asarray(colours), rcond=None
+    )[0]
+    yy, xx = np.mgrid[0:h, 0:w]
+    features = np.stack([xx / w, yy / h, np.ones_like(xx)], axis=-1)
+    background = np.clip(features @ coefficients, 0, 255).astype(np.uint8)
+
+    base = Image.fromarray(source.astype(np.uint8), "RGB").convert("RGBA")
+    patch = Image.fromarray(background, "RGB").convert("RGBA")
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).rectangle(
+        (int(w * 0.625), -10, w + 10, int(h * 0.258)), fill=255
+    )
+    mask = mask.filter(ImageFilter.GaussianBlur(6))
+    base.paste(patch, (0, 0), mask)
+    return base.convert("RGB")
 
 
 def paste_transparent_logo(im: Image.Image) -> Image.Image:
