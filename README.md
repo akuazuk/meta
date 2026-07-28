@@ -1,9 +1,9 @@
-# Meta Ads — интеграция (Marketing API + Conversions API)
+# Meta Ads – интеграция (Marketing API + Conversions API)
 
 Программное управление рекламным аккаунтом Meta и серверное отслеживание
 конверсий для лид-генерации. Реализованы шаги 1–3 плана:
 
-1. Доступы (System User + долгоживущий токен) — чек-лист ниже.
+1. Доступы (System User + долгоживущий токен) – чек-лист ниже.
 2. Каркас проекта + конфиг + проверка авторизации.
 3. Отправка события `Lead` через Conversions API (Pixel + CAPI, дедуп, Test Events).
 
@@ -23,10 +23,27 @@ scripts/
   exchange_token.py      # short-lived -> long-lived токен
   build_ad_banners.py    # сборка финальных рекламных изображений
   create_test_campaign.py # проверка и создание PAUSED-кампании
+  diagnose_blockers.py   # read-only проверка блокеров размещения
 ```
 
 Подробный воспроизводимый процесс создания креативов и кампании:
 [`docs/CREATIVE_CAMPAIGN_RUNBOOK.md`](docs/CREATIVE_CAMPAIGN_RUNBOOK.md).
+
+## Продолжение работы с другого компьютера
+
+Размещение объявлений сейчас заблокировано на стороне Meta: приложение
+`Kravira_MRS` находится в режиме разработки. Кампания и группа объявлений уже
+созданы и стоят на паузе.
+
+Что именно мешает, какие ID уже созданы, что должен сделать администратор
+вручную и готовый текст запроса агентству:
+[`docs/HANDOFF_BLOCKERS.md`](docs/HANDOFF_BLOCKERS.md).
+
+Проверить актуальный статус блокеров, ничего не меняя в Meta:
+
+```bash
+python -m scripts.diagnose_blockers
+```
 
 ## Шаг 1. Доступы (делается в интерфейсах Meta)
 
@@ -37,7 +54,7 @@ scripts/
 - [ ] **Assets**: назначить System User доступ к рекламному аккаунту, Pixel/Dataset и Странице.
 - [ ] **Долгоживущий токен** System User с правами:
       `ads_management`, `ads_read`, `business_management`, `leads_retrieval`.
-- [ ] Для боевого использования вне тестового аккаунта — пройти **App Review**.
+- [ ] Для боевого использования вне тестового аккаунта – пройти **App Review**.
 - [ ] Создать **Dataset** в Events Manager, взять его ID для CAPI.
 - [ ] (Опц.) Взять **Test Event Code** из вкладки Test Events.
 
@@ -85,8 +102,8 @@ fbq('track', 'Lead', {}, { eventID: eventId });
 
 ## Дальше по плану
 
-- Шаг 4: Conversion Leads Optimization — возврат стадий лида из CRM (`Qualified Lead`, `Converted Lead`) через `action_source=SYSTEM_GENERATED`.
+- Шаг 4: Conversion Leads Optimization – возврат стадий лида из CRM (`Qualified Lead`, `Converted Lead`) через `action_source=SYSTEM_GENERATED`.
 - Шаг 5: Leadgen Webhook + выгрузка лидов из Instant Forms.
-- Шаг 6: программное создание кампаний — реализован безопасный идемпотентный
+- Шаг 6: программное создание кампаний – реализован безопасный идемпотентный
   сценарий для Website Sales, создающий все объекты в `PAUSED`.
 - Шаг 7: метрики через Insights API.
