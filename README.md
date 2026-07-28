@@ -21,7 +21,12 @@ scripts/
   verify_auth.py         # диагностика токена + список рекламных аккаунтов
   send_test_lead.py      # тестовое событие Lead в Test Events
   exchange_token.py      # short-lived -> long-lived токен
+  build_ad_banners.py    # сборка финальных рекламных изображений
+  create_test_campaign.py # проверка и создание PAUSED-кампании
 ```
+
+Подробный воспроизводимый процесс создания креативов и кампании:
+[`docs/CREATIVE_CAMPAIGN_RUNBOOK.md`](docs/CREATIVE_CAMPAIGN_RUNBOOK.md).
 
 ## Шаг 1. Доступы (делается в интерфейсах Meta)
 
@@ -82,5 +87,6 @@ fbq('track', 'Lead', {}, { eventID: eventId });
 
 - Шаг 4: Conversion Leads Optimization — возврат стадий лида из CRM (`Qualified Lead`, `Converted Lead`) через `action_source=SYSTEM_GENERATED`.
 - Шаг 5: Leadgen Webhook + выгрузка лидов из Instant Forms.
-- Шаг 6: программное создание Advantage+ Leads кампаний.
+- Шаг 6: программное создание кампаний — реализован безопасный идемпотентный
+  сценарий для Website Sales, создающий все объекты в `PAUSED`.
 - Шаг 7: метрики через Insights API.
