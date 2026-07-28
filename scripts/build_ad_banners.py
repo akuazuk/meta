@@ -1,9 +1,7 @@
-"""Сборка баннеров Кравира v5.
+"""Сборка финальных баннеров из эталона v2-стиля.
 
-- прозрачный логотип image/brand/logo_transparent.png
-- телефонная иконка из референса image/brand/phone_icon.png
-- шрифт Montserrat (ExtraBold/Bold/SemiBold)
-- короткое тире –
+Берёт AI-эталоны стиля, убирает нарисованное лого, ставит прозрачный
+`image/brand/logo_transparent.png`, заменяет длинное тире на короткое `–`.
 
 Запуск:
     source .venv/bin/activate
@@ -15,155 +13,146 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
+ASSETS = Path.home() / ".cursor/projects/Users-pavelkuzauka-Cursor-Folders-Meta/assets"
+OUT = ROOT / "image" / "concepts"
 BRAND = ROOT / "image" / "brand"
 FONTS = ROOT / "assets" / "fonts"
-OUT = ROOT / "image" / "concepts"
 LOGO = BRAND / "logo_transparent.png"
-PHONE = BRAND / "phone_icon.png"
 
-BG = (184, 220, 214)
-DARK = (18, 88, 74)
-WHITE = (255, 255, 255)
-PILL = (70, 143, 130)
-W = H = 1080
+# Локальные копии эталонов (если assets недоступны, кладём источники в image/brand/sources)
+SOURCES = {
+    "final_1_unique.jpg": [
+        ASSETS / "kravira_v2_concept_1_unique.jpg",
+        BRAND / "sources" / "kravira_v2_concept_1_unique.jpg",
+    ],
+    "final_2_health.jpg": [
+        ASSETS / "kravira_v2_concept_2_health.jpg",
+        BRAND / "sources" / "kravira_v2_concept_2_health.jpg",
+    ],
+    "final_3_hear.jpg": [
+        ASSETS / "kravira_v2_concept_3_hear.jpg",
+        BRAND / "sources" / "kravira_v2_concept_3_hear.jpg",
+    ],
+}
+
+DASH_SPECS = {
+    "final_1_unique.jpg": [
+        {"region": (400, 270, 560, 340), "mode": "dark", "size": 54},
+        {"region": (340, 440, 470, 510), "mode": "white", "size": 50},
+    ],
+    "final_2_health.jpg": [
+        {"region": (600, 280, 760, 350), "mode": "dark", "size": 50},
+    ],
+    "final_3_hear.jpg": [],
+}
 
 
-def fnt(name: str, size: int) -> ImageFont.FreeTypeFont:
-    path = FONTS / name
-    font = ImageFont.truetype(str(path), size=size)
-    family, style = font.getname()
-    if family != "Montserrat":
-        raise RuntimeError(f"Expected Montserrat, got {font.getname()} from {path}")
-    return font
+def resolve_source(candidates: list[Path]) -> Path:
+    for p in candidates:
+        if p.exists():
+            return p
+    raise FileNotFoundError(f"Source not found among: {candidates}")
 
 
-def make_bg() -> Image.Image:
-    base = Image.new("RGBA", (W, H), BG + (255,))
-    overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(overlay)
+def cover_logo(im: Image.Image) -> Image.Image:
+    w, h = im.size
+    sample = np.array(im.crop((int(w * 0.52), int(h * 0.03), int(w * 0.66), int(h * 0.14))))
+    mint = tuple(int(x) for x in sample.mean(axis=(0, 1))[:3])
+    ImageDraw.Draw(im).rectangle((int(w * 0.695), 0, w, int(h * 0.32)), fill=mint)
+    ov = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    od = ImageDraw.Draw(ov)
     for x, y, r, a in [
-        (820, 160, 95, 34),
-        (960, 400, 70, 24),
-        (780, 540, 55, 20),
-        (1000, 700, 80, 18),
-        (700, 120, 40, 18),
-        (860, 860, 60, 16),
-        (210, 910, 50, 14),
-        (110, 210, 35, 12),
+        (int(w * 0.84), int(h * 0.11), 55, 28),
+        (int(w * 0.93), int(h * 0.23), 42, 18),
+        (int(w * 0.76), int(h * 0.18), 34, 14),
     ]:
-        d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 255, a))
-    return Image.alpha_composite(base, overlay)
+        od.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 255, a))
+    return Image.alpha_composite(im.convert("RGBA"), ov).convert("RGB")
 
 
-def build(
-    name: str,
-    person_path: Path,
-    person_x: int,
-    dark_lines: list[str],
-    white_lines: list[str],
-    pill: str,
-    target_h: int,
-) -> Path:
+def paste_transparent_logo(im: Image.Image) -> Image.Image:
     logo = Image.open(LOGO).convert("RGBA")
-    phone = Image.open(PHONE).convert("RGBA")
-    person = Image.open(person_path).convert("RGBA")
-
-    canvas = make_bg()
-    ratio = target_h / person.height
-    person_r = person.resize((int(person.width * ratio), target_h), Image.Resampling.LANCZOS)
-    x = min(person_x, W - person_r.width + 20)
-    y = H - person_r.height + 4
-    sh_a = person_r.split()[-1].filter(ImageFilter.GaussianBlur(10))
-    sh = Image.new("RGBA", person_r.size, (0, 0, 0, 28))
-    sh.putalpha(sh_a)
-    canvas.paste(sh, (x + 6, y + 8), sh)
-    canvas.paste(person_r, (x, y), person_r)
-
-    tw = int(W * 0.185)
+    im = im.convert("RGBA")
+    w, h = im.size
+    tw = int(w * 0.195)
     lr = logo.resize((tw, int(logo.height * tw / logo.width)), Image.Resampling.LANCZOS)
-    canvas.paste(lr, (W - lr.width - 40, 30), lr)
+    im.paste(lr, (w - lr.width - 36, 26), lr)
+    return im.convert("RGB")
 
-    draw = ImageDraw.Draw(canvas)
-    x0, y0 = 56, 118
-    for line in dark_lines:
-        size = 54
-        font = fnt("Montserrat-ExtraBold.ttf", size)
-        while draw.textlength(line, font=font) > 530 and size > 36:
-            size -= 1
-            font = fnt("Montserrat-ExtraBold.ttf", size)
-        draw.text((x0, y0), line, font=font, fill=DARK)
-        y0 = draw.textbbox((x0, y0), line, font=font)[3] + 2
-    y0 += 26
-    for line in white_lines:
-        size = 46
-        font = fnt("Montserrat-Bold.ttf", size)
-        while draw.textlength(line, font=font) > 530 and size > 32:
-            size -= 1
-            font = fnt("Montserrat-Bold.ttf", size)
-        draw.text((x0, y0), line, font=font, fill=WHITE)
-        y0 = draw.textbbox((x0, y0), line, font=font)[3] + 2
-    y0 += 32
 
-    f_pill = fnt("Montserrat-SemiBold.ttf", 24)
-    pad_x, pad_y = 28, 18
-    twl = draw.textlength(pill, font=f_pill)
-    bw = int(twl + pad_x * 2)
-    bh = pad_y * 2 + 28
-    draw.rounded_rectangle((x0, y0, x0 + bw, y0 + bh), radius=32, fill=PILL)
-    draw.text((x0 + pad_x, y0 + pad_y - 2), pill, font=f_pill, fill=WHITE)
+def overwrite_dash(im: Image.Image, region, mode: str, size: int) -> Image.Image:
+    x0, y0, x1, y1 = region
+    patch = np.array(im.crop((x0, y0, x1, y1)))
+    if mode == "dark":
+        target = np.array([21.0, 90.0, 76.0])
+        dist = np.linalg.norm(patch.astype(float) - target, axis=2)
+        mask = dist < 30
+        fill = (21, 90, 76)
+    else:
+        mask = (patch[..., 0] > 230) & (patch[..., 1] > 230) & (patch[..., 2] > 230)
+        fill = (255, 255, 255)
 
-    icon = phone.resize((88, 88), Image.Resampling.LANCZOS)
-    canvas.paste(icon, (46, 956), icon)
-    draw.text((148, 946), "403", font=fnt("Montserrat-ExtraBold.ttf", 84), fill=WHITE)
+    h, w = mask.shape
+    best = None
+    for y in range(h):
+        x = 0
+        while x < w:
+            if mask[y, x]:
+                x2 = x
+                while x2 < w and mask[y, x2]:
+                    x2 += 1
+                if x2 - x >= 35:
+                    y2 = y
+                    while y2 < h and mask[y2, x:x2].mean() > 0.5:
+                        y2 += 1
+                    if 3 <= y2 - y <= 14:
+                        cand = (x, y, x2 - x, y2 - y)
+                        if best is None or cand[2] > best[2]:
+                            best = cand
+                x = x2
+            else:
+                x += 1
+    if not best:
+        return im
 
+    bx, by, bw, bh = best
+    ax, ay = x0 + bx, y0 + by
+    draw = ImageDraw.Draw(im)
+    mint = tuple(
+        int(v)
+        for v in np.array(im.crop((ax, max(0, ay - 12), ax + bw, max(1, ay)))).mean(axis=(0, 1))[:3]
+    )
+    draw.rectangle((ax - 2, ay - 2, ax + bw + 2, ay + bh + 2), fill=mint)
+    font = ImageFont.truetype(str(FONTS / "Montserrat-ExtraBold.ttf"), size)
+    family, _ = font.getname()
+    if family != "Montserrat":
+        raise RuntimeError(f"Expected Montserrat, got {font.getname()}")
+    draw.text((ax, ay - size * 0.35), "–", font=font, fill=fill)
+    return im
+
+
+def build_one(dst_name: str) -> Path:
+    src = resolve_source(SOURCES[dst_name])
+    im = Image.open(src).convert("RGB").resize((1080, 1080), Image.Resampling.LANCZOS)
+    im = cover_logo(im)
+    for spec in DASH_SPECS[dst_name]:
+        im = overwrite_dash(im, spec["region"], spec["mode"], spec["size"])
+    im = paste_transparent_logo(im)
     OUT.mkdir(parents=True, exist_ok=True)
-    out = OUT / name
-    canvas.convert("RGB").save(out, quality=95)
+    out = OUT / dst_name
+    im.save(out, quality=95)
     return out
 
 
 def main() -> int:
-    if not LOGO.exists() or not PHONE.exists():
-        raise SystemExit("Need logo_transparent.png and phone_icon.png in image/brand/")
-
-    # runtime font proof
-    proof = fnt("Montserrat-ExtraBold.ttf", 40)
-    print("font_ok", proof.getname())
-
-    paths = [
-        build(
-            "v5_1_unique.jpg",
-            OUT / "cut_osi_clean.png",
-            560,
-            ["КАЖДЫЙ ПАЦИЕНТ –", "ЕДИНСТВЕННЫЙ"],
-            ["ЗДОРОВЬЕ – БЕЗ", "ШАБЛОНОВ"],
-            "Запишитесь – услышим вас",
-            945,
-        ),
-        build(
-            "v5_2_health.jpg",
-            OUT / "cut_bat_clean.png",
-            510,
-            ["ВАШЕ ЗДОРОВЬЕ –", "НАША ГЛАВНАЯ ЦЕЛЬ"],
-            ["25 ЛЕТ РЯДОМ –", "В МИНСКЕ С ВАМИ"],
-            "3 филиала – 120+ врачей",
-            900,
-        ),
-        build(
-            "v5_3_hear.jpg",
-            OUT / "cut_bat2_clean.png",
-            560,
-            ["МЫ СЛЫШИМ", "КАЖДОГО"],
-            ["ПУТЬ К ЗДОРОВЬЮ –", "ВСЕГДА СВОЙ"],
-            "Кравира – клиника рядом",
-            945,
-        ),
-    ]
-    for p in paths:
-        print("saved", p)
+    if not LOGO.exists():
+        raise SystemExit(f"Missing transparent logo: {LOGO}")
+    for name in SOURCES:
+        path = build_one(name)
+        print("saved", path)
     return 0
 
 

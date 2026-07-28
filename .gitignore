@@ -6,5 +6,10 @@ venv/
 .DS_Store
 tmp_refs/
 image/concepts/cut_*.png
+image/concepts/concept_*.jpg
+image/concepts/v[0-9]_*.jpg
+image/concepts/v[0-9]_*.png
+image/concepts/*_logo_check.jpg
+image/brand/ref_*.jpg
 image/brand/_logo_download.bin
-image/concepts/v4_*.png
+image/_logo.eps
