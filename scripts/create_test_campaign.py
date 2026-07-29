@@ -213,9 +213,16 @@ def creative_params(
         "object_story_spec": story_spec(
             spec, image_hash, page_id, instagram_id
         ),
+        # standard_enhancements deprecated since Marketing API v22 —
+        # opt out of individual Advantage+ creative features instead.
         "degrees_of_freedom_spec": {
             "creative_features_spec": {
-                "standard_enhancements": {"enroll_status": "OPT_OUT"}
+                "adapt_to_placement": {"enroll_status": "OPT_OUT"},
+                "enhance_cta": {"enroll_status": "OPT_OUT"},
+                "image_templates": {"enroll_status": "OPT_OUT"},
+                "image_touchups": {"enroll_status": "OPT_OUT"},
+                "inline_comment": {"enroll_status": "OPT_OUT"},
+                "text_optimizations": {"enroll_status": "OPT_OUT"},
             }
         },
     }

@@ -1,19 +1,25 @@
 # План тестовой кампании Meta Ads
 
-## Текущий статус
+## Текущий статус (29 июля 2026)
 
-Кампания `120250238338830770` и группа объявлений `120250238339070770`
-созданы и стоят на паузе. Объявления пока создать нельзя: приложение
-`Kravira_MRS` находится в режиме разработки, поэтому Meta блокирует создание
-оформления рекламы ошибкой `1885183`.
+| Объект | ID | Статус |
+| --- | --- | --- |
+| Кампания | `120250238338830770` | `PAUSED` |
+| Группа | `120250238339070770` | `PAUSED`, 50 PLN/день |
+| Ad 01 Individual approach | `120250257575060770` | `PAUSED` |
+| Ad 02 Health first | `120250257576040770` | `PAUSED` |
+| Ad 03 We hear everyone | `120250257576710770` | `PAUSED` |
 
-Разбор блокеров и что нужно сделать вручную:
-[`HANDOFF_BLOCKERS.md`](HANDOFF_BLOCKERS.md).
+Приложение Live, креативы и объявления созданы через API.
+Перед показами снять/поднять `spend_cap` (остаток может быть 0 PLN).
+В `ACTIVE` не переводить без отдельного подтверждения.
 
-Проверка статуса блокеров без изменений в Meta:
+Бриф для новых заданий: [`AD_TASK_BRIEF.md`](AD_TASK_BRIEF.md).  
+Блокеры / handoff: [`HANDOFF_BLOCKERS.md`](HANDOFF_BLOCKERS.md).
 
 ```bash
 python -m scripts.diagnose_blockers
+python -m scripts.create_test_campaign --verify
 ```
 
 ## Безопасный режим
@@ -28,9 +34,11 @@ python -m scripts.diagnose_blockers
 - Цель: продажи / конверсии на сайте (`OUTCOME_SALES`).
 - Сайт: `https://kravira.by/`.
 - Стратегия: максимальное количество конверсий.
+- Название: `Kravira | Website Sales | Minsk | 2026-07 | Test`.
 
 ## Группа объявлений
 
+- Название: `Minsk | MRS_Try_180_days | Online Booking | 50 PLN`.
 - Место конверсии: сайт.
 - Pixel/Dataset: `kravira_mrs_ads` (`1524169318700997`).
 - Конверсия: custom event `MRS_FB_onlineBooking` с типом `OTHER`.
@@ -42,16 +50,18 @@ python -m scripts.diagnose_blockers
 
 ## Объявления
 
-Создать три отдельных объявления:
+Три отдельных объявления:
 
-1. `image/concepts/final_1_unique.jpg`
-2. `image/concepts/final_2_health.jpg`
-3. `image/concepts/final_3_hear.jpg`
+| # | Имя | Файл | Creative ID |
+| --- | --- | --- | --- |
+| 1 | `01 \| Individual approach` | `image/concepts/final_1_unique.jpg` | `1531174861277327` |
+| 2 | `02 \| Health first` | `image/concepts/final_2_health.jpg` | `1339921248353269` |
+| 3 | `03 \| We hear everyone` | `image/concepts/final_3_hear.jpg` | `1579654607143218` |
 
 - Тексты: соответствующие варианты из `docs/AD_COPY.md`.
 - CTA: `LEARN_MORE`.
 - Ссылка: `https://kravira.by/`.
-- Не включать автоматические улучшения креатива, способные менять изображение или текст.
+- Advantage+ creative features – индивидуально `OPT_OUT`.
 - UTM-метки не добавлять до отдельного согласования.
 
 ## Проверки перед созданием
@@ -60,6 +70,7 @@ python -m scripts.diagnose_blockers
 - Доступность Pixel/Dataset и конверсии `MRS_FB_onlineBooking`.
 - Доступность аудитории `MRS_Try_180_days`.
 - Корректность валюты аккаунта – PLN.
+- Политика недискриминации принята для System User в BM Kravira.
 - После создания проверить структуру и параметры через API, оставив всё на паузе.
 
 ## Как подготовлены изображения
@@ -81,6 +92,5 @@ python -m scripts.build_ad_banners
 5. Знак не перекрывает врача, рекламный текст или номер `403`.
 6. Финальные изображения сохраняются в JPEG с высоким качеством.
 
-Подробный runbook по подготовке креативов, проверкам, безопасному созданию и
-восстановлению после частичного сбоя:
+Подробный runbook:
 [`CREATIVE_CAMPAIGN_RUNBOOK.md`](CREATIVE_CAMPAIGN_RUNBOOK.md).

@@ -316,7 +316,9 @@ python -m scripts.create_test_campaign --verify
 - место конверсии — `WEBSITE`;
 - событие — `MRS_FB_onlineBooking`;
 - Dynamic Creative выключен;
-- standard enhancements — `OPT_OUT`.
+- Advantage+ creative features (adapt_to_placement, image_touchups,
+  text_optimizations и др.) — индивидуально `OPT_OUT`
+  (`standard_enhancements` с v22 больше не поддерживается).
 
 Затем вручную открыть Ads Manager и проверить preview всех плейсментов.
 
@@ -335,29 +337,22 @@ python -m scripts.create_test_campaign --verify
 Только после этого кампания, группа и объявления переводятся в `ACTIVE`
 отдельной операцией.
 
-## 9. Текущее состояние на 28 июля 2026
+## 9. Текущее состояние на 29 июля 2026
 
-- Кампания `120250238338830770` создана в `PAUSED`.
-- Группа объявлений `120250238339070770` создана в `PAUSED`.
-- Загружено первое рекламное изображение, hash
-  `23484b578160d1115125d7a5eb0c02ca`.
-- Креативы и объявления не созданы.
-- Повторная проверка Meta возвращает `1885183`: приложение `Kravira_MRS`
-  (`1045577707887803`) всё ещё определяется как Development Mode.
+- Кампания `120250238338830770` и группа `120250238339070770` – `PAUSED`.
+- Три объявления созданы в `PAUSED`:
+  `120250257575060770`, `120250257576040770`, `120250257576710770`.
+- Приложение Live; политика недискриминации для System User принята (BM Kravira).
+- Перед показами проверить `spend_cap` (остаток может быть 0 PLN).
+- Бриф для новых заданий: [`AD_TASK_BRIEF.md`](AD_TASK_BRIEF.md).
 
 Полный разбор блокеров, реквизиты окружения, ручные шаги для администратора
 и текст запроса агентству:
 [`HANDOFF_BLOCKERS.md`](HANDOFF_BLOCKERS.md).
 
-Проверить, сняты ли блокеры, можно read-only командой:
+Проверить блокеры и результат:
 
 ```bash
 python -m scripts.diagnose_blockers
-```
-
-После перевода приложения в Live нужно повторить:
-
-```bash
-python -m scripts.create_test_campaign --create
 python -m scripts.create_test_campaign --verify
 ```
