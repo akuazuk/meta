@@ -1,21 +1,47 @@
 # План тестовой кампании Meta Ads
 
-## Текущий статус (29 июля 2026)
+## Текущий статус (29 июля 2026, вечер)
 
 | Объект | ID | Статус |
 | --- | --- | --- |
-| Кампания | `120250238338830770` | `PAUSED` |
-| Группа | `120250238339070770` | `PAUSED`, 50 PLN/день |
-| Ad 01 Individual approach | `120250257575060770` | `PAUSED` |
-| Ad 02 Health first | `120250257576040770` | `PAUSED` |
-| Ad 03 We hear everyone | `120250257576710770` | `PAUSED` |
+| Кампания | `120250238338830770` | `ACTIVE` |
+| Группа | `120250238339070770` | `ACTIVE`, 50 PLN/день |
+| Ad 01 Individual approach | `120250257575060770` | `ACTIVE` |
+| Ad 02 Health first | `120250257576040770` | `ACTIVE` |
+| Ad 03 We hear everyone | `120250257576710770` | `ACTIVE` |
 
-Приложение Live, креативы и объявления созданы через API.
-Перед показами снять/поднять `spend_cap` (остаток может быть 0 PLN).
-В `ACTIVE` не переводить без отдельного подтверждения.
+Приложение Live. `spend_cap` аккаунта поднят (~2850 PLN), блокеров размещения нет.
+Тестовая кампания уже крутится и тратит бюджет.
 
-Бриф для новых заданий: [`AD_TASK_BRIEF.md`](AD_TASK_BRIEF.md).  
-Блокеры / handoff: [`HANDOFF_BLOCKERS.md`](HANDOFF_BLOCKERS.md).
+### Preview объявлений
+
+| Объявление | Preview |
+| --- | --- |
+| 01 Individual approach | https://fb.me/21zeWr951rqXyPt |
+| 02 Health first | https://fb.me/2bDSxgkLnSkd5Yu |
+| 03 We hear everyone | https://fb.me/yvkCAFXnfR0LPMR |
+
+### Доставка (lifetime на 29.07, API Insights)
+
+| Метрика | Значение |
+| --- | --- |
+| Показы | ~8 665 |
+| Охват | ~5 700+ по сумме ads |
+| Клики | 44 (link clicks ~28) |
+| Landing page views | 10 |
+| Расход кампании | ~24 PLN |
+| Custom pixel conversions | 2 (`offsite_conversion.fb_pixel_custom`) |
+| Именованная custom conversion | 1 × `MRS_Ph_Spec` (телефонный Test_F_Ph) |
+
+Оптимизация группы – custom event `MRS_FB_onlineBooking`. В Insights пока явно
+видно общее custom pixel и `MRS_Ph_Spec`; отдельно сверить `MRS_FB_onlineBooking`
+во вкладке Events Manager / Test Events при записи онлайн.
+
+### Что дальше
+
+- Новые объявления / кампании – только по брифу [`AD_TASK_BRIEF.md`](AD_TASK_BRIEF.md), создавать в `PAUSED`.
+- Не дублировать эту тестовую структуру без нужды.
+- История блокеров: [`HANDOFF_BLOCKERS.md`](HANDOFF_BLOCKERS.md).
 
 ```bash
 python -m scripts.diagnose_blockers

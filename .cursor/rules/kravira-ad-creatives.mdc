@@ -29,11 +29,11 @@ alwaysApply: true
 - Для других форматов, где нужен полный словесный знак, использовать
   `image/brand/logo_transparent.png` строго с альфа-каналом.
 - Не рисовать логотип нейросетью.
-- `image/_logo.eps` невалиден (AppleDouble) — не использовать, пока не будет настоящего `.eps/.svg/.pdf`.
+- `image/_logo.eps` невалиден (AppleDouble) – не использовать, пока не будет настоящего `.eps/.svg/.pdf`.
 
 ## Типографика
 
-- На баннерах и в ad copy — **Montserrat** и вариации (`assets/fonts/Montserrat-*.ttf`).
+- На баннерах и в ad copy – **Montserrat** и вариации (`assets/fonts/Montserrat-*.ttf`).
 - Перед рендером проверять `font.getname()` → family = `Montserrat`.
 - Начертания: ExtraBold/Bold для заголовков, SemiBold для pill, Medium/Regular для мелкого текста.
 
@@ -73,13 +73,13 @@ alwaysApply: true
 
 ## Текущее состояние тестовой кампании
 
-- Кампания `120250238338830770`, группа `120250238339070770` – `PAUSED`.
-- Объявления созданы в `PAUSED`:
+- Кампания `120250238338830770`, группа `120250238339070770` – **`ACTIVE`**.
+- Объявления **`ACTIVE`**:
   `120250257575060770`, `120250257576040770`, `120250257576710770`.
-- Перед показами: снять/поднять `spend_cap` (остаток может быть 0 PLN).
+- `spend_cap` поднят; доставка идёт. Preview/метрики: `docs/CAMPAIGN_PLAN.md`.
+- Новые объекты – только по `docs/AD_TASK_BRIEF.md`, создавать в `PAUSED`.
 - Диагностика: `python -m scripts.diagnose_blockers`.
 - История блокеров: `docs/HANDOFF_BLOCKERS.md`.
-
 ## Как собраны изображения
 
 - Источник: утверждённые макеты из `image/brand/sources/`.
@@ -104,5 +104,5 @@ alwaysApply: true
 
 ## Git
 
-- После правок креативов/правил — сразу commit + push.
+- После правок креативов/правил – сразу commit + push.
 - Не коммитить `.env`, `tmp_refs/`, cutout/draft изображения.

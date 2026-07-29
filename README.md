@@ -37,15 +37,18 @@ scripts/
 
 ## Статус и диагностика
 
-Тестовая кампания и три объявления созданы в `PAUSED`. Перед показами
-проверить лимит расходов аккаунта. История блокеров:
-[`docs/HANDOFF_BLOCKERS.md`](docs/HANDOFF_BLOCKERS.md).
+Тестовая кампания и три объявления сейчас **`ACTIVE`** и уже показывают рекламу.
+`spend_cap` поднят. Актуальные ID, preview и метрики:
+[`docs/CAMPAIGN_PLAN.md`](docs/CAMPAIGN_PLAN.md).
+
+Новые объявления / кампании – по брифу
+[`docs/AD_TASK_BRIEF.md`](docs/AD_TASK_BRIEF.md) (создавать только в `PAUSED`).
+История блокеров: [`docs/HANDOFF_BLOCKERS.md`](docs/HANDOFF_BLOCKERS.md).
 
 ```bash
 python -m scripts.diagnose_blockers
 python -m scripts.create_test_campaign --verify
 ```
-
 ## Шаг 1. Доступы (делается в интерфейсах Meta)
 
 - [ ] **Business Manager** (business.facebook.com) с доступом к бизнесу.

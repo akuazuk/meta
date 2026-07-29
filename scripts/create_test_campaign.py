@@ -213,7 +213,7 @@ def creative_params(
         "object_story_spec": story_spec(
             spec, image_hash, page_id, instagram_id
         ),
-        # standard_enhancements deprecated since Marketing API v22 —
+        # standard_enhancements deprecated since Marketing API v22 –
         # opt out of individual Advantage+ creative features instead.
         "degrees_of_freedom_spec": {
             "creative_features_spec": {
@@ -373,15 +373,19 @@ def create(account: AdAccount) -> int:
     return 0
 
 
+KNOWN_CAMPAIGN_ID = "120250238338830770"
+KNOWN_ADSET_ID = "120250238339070770"
+
+
 def verify() -> int:
     state = load_state()
-    if not state.get("campaign_id") or not state.get("adset_id"):
-        raise RuntimeError("State does not contain campaign and ad set IDs")
+    campaign_id = state.get("campaign_id") or KNOWN_CAMPAIGN_ID
+    adset_id = state.get("adset_id") or KNOWN_ADSET_ID
 
-    campaign = Campaign(state["campaign_id"]).api_get(
+    campaign = Campaign(campaign_id).api_get(
         fields=["name", "objective", "status", "effective_status"]
     )
-    adset = AdSet(state["adset_id"]).api_get(
+    adset = AdSet(adset_id).api_get(
         fields=[
             "name",
             "status",
@@ -398,40 +402,66 @@ def verify() -> int:
         ]
     )
     ads = list(
-        AdSet(state["adset_id"]).get_ads(
+        AdSet(adset_id).get_ads(
             fields=["id", "name", "status", "effective_status"]
         )
     )
 
-    if campaign.get("status") != "PAUSED":
-        raise RuntimeError("Campaign is not PAUSED")
-    if adset.get("status") != "PAUSED":
-        raise RuntimeError("Ad set is not PAUSED")
+    if campaign.get("name") != CAMPAIGN_NAME:
+        raise RuntimeError(f"Unexpected campaign name: {campaign.get('name')}")
+    if adset.get("name") != ADSET_NAME:
+        raise RuntimeError(f"Unexpected ad set name: {adset.get('name')}")
     if len(ads) != len(ADS):
         raise RuntimeError(f"Expected {len(ADS)} ads, found {len(ads)}")
-    if any(item.get("status") != "PAUSED" for item in ads):
-        raise RuntimeError("At least one ad is not PAUSED")
+    if str(adset.get("daily_budget")) != "5000":
+        raise RuntimeError(f"Unexpected daily budget: {adset.get('daily_budget')}")
+    if adset.get("optimization_goal") != "OFFSITE_CONVERSIONS":
+        raise RuntimeError("Optimization goal is not OFFSITE_CONVERSIONS")
+    promoted = dict(adset.get("promoted_object") or {})
+    if promoted.get("custom_event_str") != EVENT_NAME:
+        raise RuntimeError(f"Unexpected conversion event: {promoted}")
+
+    statuses = [campaign.get("status"), adset.get("status")] + [
+        item.get("status") for item in ads
+    ]
+    if any(status != "PAUSED" for status in statuses):
+        print("[info] objects are not all PAUSED – reporting live statuses")
 
     print(
         "[campaign]",
         {
+            "id": campaign_id,
             "name": campaign.get("name"),
             "objective": campaign.get("objective"),
             "status": campaign.get("status"),
+            "effective_status": campaign.get("effective_status"),
         },
     )
     print(
         "[ad set]",
         {
+            "id": adset_id,
             "name": adset.get("name"),
             "status": adset.get("status"),
+            "effective_status": adset.get("effective_status"),
             "daily_budget": adset.get("daily_budget"),
             "optimization_goal": adset.get("optimization_goal"),
             "destination_type": adset.get("destination_type"),
-            "promoted_object": dict(adset.get("promoted_object") or {}),
+            "promoted_object": promoted,
         },
     )
-    print("[ads]", [{"name": item.get("name"), "status": item.get("status")} for item in ads])
+    print(
+        "[ads]",
+        [
+            {
+                "id": item.get("id"),
+                "name": item.get("name"),
+                "status": item.get("status"),
+                "effective_status": item.get("effective_status"),
+            }
+            for item in ads
+        ],
+    )
     return 0
 
 
