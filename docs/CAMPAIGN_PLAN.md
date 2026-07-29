@@ -39,6 +39,9 @@
 
 ### Что дальше
 
+Полный чеклист «сделано / нужно сделать» по аудиту аккаунта:
+[`ACTION_CHECKLIST.md`](ACTION_CHECKLIST.md).
+
 - Новые объявления / кампании – только по брифу [`AD_TASK_BRIEF.md`](AD_TASK_BRIEF.md), создавать в `PAUSED`.
 - Не дублировать эту тестовую структуру без нужды.
 - История блокеров: [`HANDOFF_BLOCKERS.md`](HANDOFF_BLOCKERS.md).

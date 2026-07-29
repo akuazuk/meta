@@ -35,12 +35,16 @@ scripts/
 
 План и ID тестовой кампании: [`docs/CAMPAIGN_PLAN.md`](docs/CAMPAIGN_PLAN.md).
 
+Что уже сделано и что нужно сделать после аудита ACTIVE-кампаний:
+[`docs/ACTION_CHECKLIST.md`](docs/ACTION_CHECKLIST.md).
+
 ## Статус и диагностика
 
 Тестовая кампания и три объявления сейчас **`ACTIVE`** и уже показывают рекламу.
 `spend_cap` поднят. Актуальные ID, preview и метрики:
 [`docs/CAMPAIGN_PLAN.md`](docs/CAMPAIGN_PLAN.md).
 
+Чеклист действий: [`docs/ACTION_CHECKLIST.md`](docs/ACTION_CHECKLIST.md).
 Новые объявления / кампании – по брифу
 [`docs/AD_TASK_BRIEF.md`](docs/AD_TASK_BRIEF.md) (создавать только в `PAUSED`).
 История блокеров: [`docs/HANDOFF_BLOCKERS.md`](docs/HANDOFF_BLOCKERS.md).

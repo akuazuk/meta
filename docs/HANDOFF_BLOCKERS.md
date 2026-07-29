@@ -16,6 +16,7 @@
 - Именованная конверсия в Insights: `MRS_Ph_Spec`; событие оптимизации
   `MRS_FB_onlineBooking` – сверить в Events Manager.
 - Новые задачи: [`AD_TASK_BRIEF.md`](AD_TASK_BRIEF.md) (новые объекты – только `PAUSED`).
+- Чеклист после аудита ACTIVE-кампаний: [`ACTION_CHECKLIST.md`](ACTION_CHECKLIST.md).
 - Проверка: `python -m scripts.diagnose_blockers`.
 
 ## 1. Краткая суть (исторический блокер 28.07)

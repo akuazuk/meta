@@ -77,6 +77,7 @@ alwaysApply: true
 - Объявления **`ACTIVE`**:
   `120250257575060770`, `120250257576040770`, `120250257576710770`.
 - `spend_cap` поднят; доставка идёт. Preview/метрики: `docs/CAMPAIGN_PLAN.md`.
+- Чеклист «сделано / нужно»: `docs/ACTION_CHECKLIST.md`.
 - Новые объекты – только по `docs/AD_TASK_BRIEF.md`, создавать в `PAUSED`.
 - Диагностика: `python -m scripts.diagnose_blockers`.
 - История блокеров: `docs/HANDOFF_BLOCKERS.md`.
