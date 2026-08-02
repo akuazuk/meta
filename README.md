@@ -1,7 +1,8 @@
-# Meta Ads – интеграция (Marketing API + Conversions API)
+# Meta Ads + Google Ads – интеграции
 
-Программное управление рекламным аккаунтом Meta и серверное отслеживание
-конверсий для лид-генерации. Реализованы шаги 1–3 плана:
+Программное управление рекламой Meta и Google Ads (агентство → клиенты),
+плюс серверное отслеживание конверсий Meta (CAPI). Для Meta реализованы
+шаги 1–3 плана:
 
 1. Доступы (System User + долгоживущий токен) – чек-лист ниже.
 2. Каркас проекта + конфиг + проверка авторизации.
@@ -25,9 +26,28 @@ scripts/
   create_test_campaign.py # проверка и создание PAUSED-кампании
   diagnose_blockers.py   # read-only проверка блокеров размещения
   burn_marketing_api_calls.py # нагон вызовов для App Review (500+)
+  google_ads_oauth.py    # получить GOOGLE_ADS_REFRESH_TOKEN
+  verify_google_ads.py   # read-only проверка Google Ads API
 ```
 
-Подробный процесс креативов и кампании:
+## Продолжение с другого компьютера
+
+```bash
+git pull
+cd meta
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+# скопировать .env с рабочей машины (не в Git) или заполнить по .env.example
+chmod 600 .env
+python -m scripts.verify_google_ads
+python -m scripts.diagnose_blockers
+```
+
+Google Ads (доступы, `.env`, OAuth, статус create/edit):
+[`docs/GOOGLE_ADS_SETUP.md`](docs/GOOGLE_ADS_SETUP.md).
+
+Подробный процесс креативов и кампании Meta:
 [`docs/CREATIVE_CAMPAIGN_RUNBOOK.md`](docs/CREATIVE_CAMPAIGN_RUNBOOK.md).
 
 Как формулировать задания на новые объявления (таргетинг, тексты, стиль):

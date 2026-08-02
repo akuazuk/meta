@@ -5,6 +5,10 @@ __pycache__/
 venv/
 .DS_Store
 tmp_refs/
+client_secret_*.json
+**/client_secret*.json
+google-ads.yaml
+.google_ads_credentials.json
 image/concepts/cut_*.png
 image/concepts/concept_*.jpg
 image/concepts/v[0-9]_*.jpg
