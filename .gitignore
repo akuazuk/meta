@@ -17,3 +17,5 @@ image/concepts/*_logo_check.jpg
 image/brand/ref_*.jpg
 image/brand/_logo_download.bin
 image/_logo.eps
+heygen/**/output/
+heygen/**/*.mp4

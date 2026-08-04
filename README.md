@@ -47,6 +47,9 @@ python -m scripts.diagnose_blockers
 Google Ads (доступы, `.env`, OAuth, статус create/edit):
 [`docs/GOOGLE_ADS_SETUP.md`](docs/GOOGLE_ADS_SETUP.md).
 
+HeyGen (ролик Осипенко, аватар, баланс, правила без дублей):
+[`docs/HEYGEN_OSIPENKO_HANDOFF.md`](docs/HEYGEN_OSIPENKO_HANDOFF.md).
+
 Подробный процесс креативов и кампании Meta:
 [`docs/CREATIVE_CAMPAIGN_RUNBOOK.md`](docs/CREATIVE_CAMPAIGN_RUNBOOK.md).
 
