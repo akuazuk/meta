@@ -1,6 +1,6 @@
 # Google Ads API – доступ агентства и продолжение с другого компьютера
 
-Документ на **2 августа 2026**. Секреты в Git не хранятся – только `.env` на машине.
+Документ обновлён **14 сентября 2026**. Секреты в Git не хранятся – только `.env` на машине.
 
 ## 1. Статус доступов (проверено)
 
@@ -13,7 +13,9 @@
 | Создание бюджета + Search-кампании + группы + RSA | OK (`validate_only`) |
 | MCC login | `GOOGLE_ADS_LOGIN_CUSTOMER_ID` |
 
-Developer token – Basic Access. Для клиентов агентства через MCC этого достаточно.
+С 09.09.2026 уровень доступа висит на Cloud-проекте OAuth-клиента, не на developer token.
+Проект `478261085970` (`carbide-datum-383616`) получил **BASIC** автоматически – письмо Google от сентября 2026.
+Клиентская библиотека `google-ads>=32` больше не шлёт заголовок `developer-token`.
 
 Кода создания/редактирования в репозитории пока нет – только OAuth-скрипт и эта инструкция.
 Следующий шаг на новой машине: проверить доступ, затем писать контур mutate.
@@ -22,7 +24,6 @@ Developer token – Basic Access. Для клиентов агентства ч�
 
 ```env
 # ==== Google Ads API (агентство → клиенты) ====
-GOOGLE_ADS_DEVELOPER_TOKEN=
 GOOGLE_ADS_CLIENT_ID=xxxxxx.apps.googleusercontent.com
 GOOGLE_ADS_CLIENT_SECRET=
 GOOGLE_ADS_REFRESH_TOKEN=
@@ -34,11 +35,12 @@ GOOGLE_ADS_CUSTOMER_ID=
 
 | Переменная | Где взять |
 | --- | --- |
-| `DEVELOPER_TOKEN` | MCC → Инструменты → API-центр |
-| `CLIENT_ID` / `CLIENT_SECRET` | Google Cloud → APIs & Services → Credentials → OAuth Desktop |
+| `CLIENT_ID` / `CLIENT_SECRET` | Google Cloud → APIs & Services → Credentials → OAuth Desktop. Проект должен быть `478261085970` / `carbide-datum-383616` – туда перенесён BASIC |
 | `REFRESH_TOKEN` | `python -m scripts.google_ads_oauth` (один раз) |
-| `LOGIN_CUSTOMER_ID` | ID MCC без дефисов |
+| `LOGIN_CUSTOMER_ID` | ID MCC без дефисов (`4529863027`) |
 | `CUSTOMER_ID` | ID клиента без дефисов |
+
+`GOOGLE_ADS_DEVELOPER_TOKEN` больше не нужен. API Center в MCC Google обещает закрыть в первой половине 2027. Уровень доступа и заявки – [Google Ads API Overview](https://console.cloud.google.com/apis/api/googleads.googleapis.com/overview?project=carbide-datum-383616). Письма после закрытия API Center пойдут Owner/Editor проекта: сейчас единственный пользователь-owner – `aicoursesus@gmail.com`. Добавить коллег: [IAM](https://console.cloud.google.com/iam-admin/iam?project=carbide-datum-383616).
 
 `CLIENT_ID` – это **не** номер аккаунта вида `713-210-8539`, а строка
 `*.apps.googleusercontent.com`.

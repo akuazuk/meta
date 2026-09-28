@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "osipenko_hall_1x1",
+    "id": "bcabee21-e296-4e56-9f3c-dde7f1ca683b",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "osipenko_window_16x9",
+    "id": "60963d0f-f8c3-4e44-b746-9f6a83784078",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "smolnik_portrait_1x1",
+    "id": "2dbb6340-31dd-4e94-a36d-a60c2b28a892",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "smolnik_hall_16x9",
+    "id": "0f066441-e9b2-4792-9e6d-8af760d7dbbd",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "ladygin_us_1x1",
+    "id": "d89efffb-5590-4b33-a505-a5e8ee51559d",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "ladygin_hall_16x9",
+    "id": "b9fa631e-8521-47f7-b6e4-1a248c71fcd5",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "popchenko_hall_1x1",
+    "id": "8ec53d36-9137-4d69-b4ab-b67068c4be51",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "popchenko_window_16x9",
+    "id": "ef2f0ed3-ec21-4cda-a0ed-9bc9469f7e6a",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "lugovskaya_hall_1x1",
+    "id": "27df8c8c-e599-4f6b-b481-f755c5a23058",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "lugovskaya_window_16x9",
+    "id": "076197d1-83a2-4ba2-abdc-c8e958405695",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "yarovoy_lor_stand_1x1",
+    "id": "b75a2bac-56be-4107-be0b-e804eda6d236",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "yarovoy_lor_hall_16x9",
+    "id": "a6211715-3e09-424f-b306-7ede28d479f5",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "batsenko_hall_1x1",
+    "id": "f159ee17-c597-4ca8-9f71-d4f31d7c939f",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "batsenko_window_16x9",
+    "id": "e5643bdd-dc57-40d7-a66c-1eee4f1ae75a",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "ryndin_stand_1x1",
+    "id": "ee137554-75dc-41d5-9fc3-f13d8118f843",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "ryndin_hall_16x9",
+    "id": "abfd3791-8277-4b94-8b66-005ea1cb2b20",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "murashko_hall_1x1",
+    "id": "73271e91-ad92-421e-951a-1165a35d45d9",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "murashko_window_16x9",
+    "id": "6c82c013-5290-4e6e-9885-caae6728fa75",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "mytnik_hall_1x1",
+    "id": "88a887a9-5fc7-452d-9ac0-fefc0e61761b",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "mytnik_window_16x9",
+    "id": "15d381ce-e881-46a9-9d90-3a1c75f2f586",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "tikhon_portrait_1x1",
+    "id": "65dc82d5-b411-4ed4-b4d0-50ecd9faa701",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "tikhon_hall_16x9",
+    "id": "894f64d0-99ad-4d2e-9cb9-207aa2c041e7",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "chernyavskaya_hall_1x1",
+    "id": "f6cc39ed-7525-4ad2-8f0d-c8922b7ca407",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "chernyavskaya_window_16x9",
+    "id": "fc17a7a7-4085-4e80-872c-9b85285ec4fc",
+    "aspect": "16:9"
+  }
+]

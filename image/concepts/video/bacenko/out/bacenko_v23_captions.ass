@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Main,Arial Black,54,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,5,0,8,34,34,45,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.10,0:00:03.05,Main,,0,0,0,,{\fad(100,120)\fscx100\fscy100\t(0,90,\fscx108\fscy108)\t(90,220,\fscx100\fscy100)\t(512,602,\fscx108\fscy108)\t(602,732,\fscx100\fscy100)\t(1024,1114,\fscx108\fscy108)\t(1114,1244,\fscx100\fscy100)\t(1536,1626,\fscx108\fscy108)\t(1626,1756,\fscx100\fscy100)\t(2048,2138,\fscx108\fscy108)\t(2138,2268,\fscx100\fscy100)\t(2560,2650,\fscx108\fscy108)\t(2650,2780,\fscx100\fscy100)}ПРИЁМ {\c&H0000FFFF&}ОКОНЧЕН
+Dialogue: 0,0:00:03.15,0:00:06.30,Main,,0,0,0,,{\fad(100,120)\fscx100\fscy100\t(0,90,\fscx108\fscy108)\t(90,220,\fscx100\fscy100)\t(512,602,\fscx108\fscy108)\t(602,732,\fscx100\fscy100)\t(1024,1114,\fscx108\fscy108)\t(1114,1244,\fscx100\fscy100)\t(1536,1626,\fscx108\fscy108)\t(1626,1756,\fscx100\fscy100)\t(2048,2138,\fscx108\fscy108)\t(2138,2268,\fscx100\fscy100)\t(2560,2650,\fscx108\fscy108)\t(2650,2780,\fscx100\fscy100)}ВСЕ {\c&H0000FFFF&}ЗДОРОВЫ
+Dialogue: 0,0:00:06.40,0:00:09.85,Main,,0,0,0,,{\fad(100,160)\fscx100\fscy100\t(0,90,\fscx108\fscy108)\t(90,220,\fscx100\fscy100)\t(512,602,\fscx108\fscy108)\t(602,732,\fscx100\fscy100)\t(1024,1114,\fscx108\fscy108)\t(1114,1244,\fscx100\fscy100)\t(1536,1626,\fscx108\fscy108)\t(1626,1756,\fscx100\fscy100)\t(2048,2138,\fscx108\fscy108)\t(2138,2268,\fscx100\fscy100)\t(2560,2650,\fscx108\fscy108)\t(2650,2780,\fscx100\fscy100)\t(3072,3162,\fscx108\fscy108)\t(3162,3292,\fscx100\fscy100)}А ДОКТОР – В {\c&H0000FFFF&}РИТМЕ

@@ -1,0 +1,44 @@
+{
+  "channel": {
+    "id": "UCXsJhTwtf_MG38r6gTHL7JQ",
+    "title": "Медицинский центр \"Кравира\"",
+    "custom_url": "@kravira_by"
+  },
+  "videos": {
+    "01_bacenko_rope_v15_ni_ru.mp4": {
+      "video_id": "hR9DY6Wsqss",
+      "url": "https://youtu.be/hR9DY6Wsqss",
+      "privacy_status": "public",
+      "title": "Как верёвочка ни вьётся – к урологу придётся",
+      "thumbnail_status": "uploaded"
+    },
+    "02_bacenko_moto_v19_ru.mp4": {
+      "video_id": "DmlY4v1WhZc",
+      "url": "https://youtu.be/DmlY4v1WhZc",
+      "privacy_status": "public",
+      "title": "Это не скорая по простате – это Баценко",
+      "thumbnail_status": "uploaded"
+    },
+    "03_bacenko_superhero_scenario_ru.mp4": {
+      "video_id": "XfmWuuHw6vw",
+      "url": "https://youtu.be/XfmWuuHw6vw",
+      "privacy_status": "public",
+      "title": "У каждого мужчины должен быть свой супергерой",
+      "thumbnail_status": "uploaded"
+    },
+    "04_bacenko_stop_suffering_virus_ru.mp4": {
+      "video_id": "_f8mPPrJxuo",
+      "url": "https://youtu.be/_f8mPPrJxuo",
+      "privacy_status": "public",
+      "title": "Хватит терпеть по-тихому – сходи к урологу",
+      "thumbnail_status": "uploaded"
+    },
+    "05_bacenko_dance_v25_ru.mp4": {
+      "video_id": "ggxRzbL_WTU",
+      "url": "https://youtu.be/ggxRzbL_WTU",
+      "privacy_status": "public",
+      "title": "Приём окончен – доктор в ритме",
+      "thumbnail_status": "uploaded"
+    }
+  }
+}

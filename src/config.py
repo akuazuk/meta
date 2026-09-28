@@ -50,6 +50,25 @@ class Settings:
         return self.ad_account_id if self.ad_account_id.startswith("act_") else f"act_{self.ad_account_id}"
 
 
+@dataclass(frozen=True)
+class MrsSettings:
+    """NEW ad account (MRS / USD) + Dataset с Conversions API."""
+
+    access_token: str
+    ad_account_id: str
+    dataset_id: str | None
+    test_event_code: str | None
+    graph_api_version: str | None
+
+    @property
+    def ad_account_ref(self) -> str:
+        return (
+            self.ad_account_id
+            if self.ad_account_id.startswith("act_")
+            else f"act_{self.ad_account_id}"
+        )
+
+
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
     return Settings(
@@ -59,6 +78,19 @@ def get_settings() -> Settings:
         ad_account_id=_get("META_AD_ACCOUNT_ID"),
         dataset_id=_get("META_DATASET_ID"),
         test_event_code=_get("META_TEST_EVENT_CODE"),
+        graph_api_version=_get("META_GRAPH_API_VERSION"),
+    )
+
+
+@lru_cache(maxsize=1)
+def get_mrs_settings() -> MrsSettings:
+    token = _get("META_ACCESS_TOKEN_MRS", required=True)
+    account = _get("META_AD_ACCOUNT_ID_MRS", required=True)
+    return MrsSettings(
+        access_token=token,
+        ad_account_id=account,
+        dataset_id=_get("META_DATASET_ID_MRS"),
+        test_event_code=_get("META_TEST_EVENT_CODE_MRS") or _get("META_TEST_EVENT_CODE"),
         graph_api_version=_get("META_GRAPH_API_VERSION"),
     )
 

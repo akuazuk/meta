@@ -1,0 +1,19 @@
+[Script Info]
+Title: bacenko proverb v2
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Hook,Montserrat ExtraBold,50,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,5,0,2,36,36,200,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.80,0:00:02.80,Hook,,0,0,0,,само пройдёт
+Dialogue: 0,0:00:02.80,0:00:05.00,Hook,,0,0,0,, сходи уже
+Dialogue: 0,0:00:05.00,0:00:06.20,Hook,,0,0,0,,у врачей пословица
+Dialogue: 0,0:00:06.20,0:00:08.00,Hook,,0,0,0,,Как верёвочка ни вьётся
+Dialogue: 0,0:00:08.00,0:00:09.10,Hook,,0,0,0,,а к урологу придётся

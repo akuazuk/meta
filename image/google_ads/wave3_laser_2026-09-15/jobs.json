@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "erokhov_hall_1x1",
+    "id": "29491ae1-edc0-4ce3-b6b6-5bcc576dc3aa",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "erokhov_window_16x9",
+    "id": "4d6e4d40-b625-4b75-86a5-7a2dfd5e9b45",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "erokhov_portrait_1x1",
+    "id": "52ceb01e-7f87-4225-8397-d139690b8a02",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "korotin_couch_1x1",
+    "id": "ca632cbd-2a25-4340-b9fd-3f481bdaf4dd",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "korotin_hall_16x9",
+    "id": "52a5edaa-8384-4999-9bfa-ace8ce61918e",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "korotin_desk_16x9",
+    "id": "16f82575-c7a8-4670-adf8-a2e7621e06cf",
+    "aspect": "16:9"
+  }
+]

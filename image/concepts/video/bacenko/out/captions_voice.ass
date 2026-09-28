@@ -1,0 +1,19 @@
+[Script Info]
+Title: bacenko 15s his voice
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Hook,Montserrat ExtraBold,50,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,5,0,2,36,36,210,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.00,Hook,,0,0,0,,Всем добрый день
+Dialogue: 0,0:00:01.00,0:00:04.90,Hook,,0,0,0,,частая причина к урологу
+Dialogue: 0,0:00:04.90,0:00:08.40,Hook,,0,0,0,,это бесплодие
+Dialogue: 0,0:00:08.40,0:00:12.20,Hook,,0,0,0,,год вместе – и нет ребёнка
+Dialogue: 0,0:00:12.20,0:00:15.00,Hook,,0,0,0,,какие причины?

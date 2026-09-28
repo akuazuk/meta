@@ -1,0 +1,8 @@
+[0:a]adelay=880|880,volume=1.0[s0];
+[0:a]adelay=1290|1290,volume=1.0[s1];
+[0:a]adelay=1620|1620,volume=1.0[s2];
+[0:a]adelay=2000|2000,volume=1.0[s3];
+[0:a]adelay=4000|4000,volume=1.0[s4];
+[0:a]adelay=8420|8420,volume=1.0[s5];
+[0:a]adelay=9000|9000,volume=1.0[s6];
+[s0][s1][s2][s3][s4][s5][s6]amix=inputs=7:duration=longest:normalize=0[out]

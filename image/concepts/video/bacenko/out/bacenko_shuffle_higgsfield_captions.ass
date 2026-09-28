@@ -1,0 +1,17 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: WhiteBox,Arial Black,62,&H00FFFFFF,&H00FFFFFF,&H5A000000,&H5A000000,-1,0,0,0,100,100,0,0,3,14,0,8,45,45,72,1
+Style: CyanBox,Arial Black,66,&H0000F4FF,&H0000F4FF,&H60000000,&H60000000,-1,0,0,0,100,100,0,0,3,14,0,8,45,45,72,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.82,WhiteBox,,0,0,0,,{\fad(80,100)\fscx108\fscy108\t(0,140,\fscx100\fscy100)}ПРИЁМ ОКОНЧЕН
+Dialogue: 0,0:00:02.00,0:00:03.82,WhiteBox,,0,0,0,,{\fad(80,100)\fscx108\fscy108\t(0,140,\fscx100\fscy100)}ВСЕ ЗДОРОВЫ
+Dialogue: 0,0:00:04.00,0:00:06.00,CyanBox,,0,0,0,,{\fad(80,100)\fscx110\fscy110\t(0,140,\fscx100\fscy100)}А ДОКТОР — В РИТМЕ

@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "osipenko_1x1",
+    "id": "9ffac6f0-593a-48c9-bcf2-bb920f81a7fb",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "osipenko_16x9",
+    "id": "d1820121-34dd-42b9-9f9d-bfeaa5c48027",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "smolnik_1x1",
+    "id": "aa147ec8-34ed-43d6-896f-1ef2366c5ce1",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "smolnik_16x9",
+    "id": "765b716a-b61b-4b93-896b-deeacede9f5a",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "ladygin_1x1",
+    "id": "394b57a9-435e-413e-9c5c-5e58c354082d",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "ladygin_16x9",
+    "id": "eecda2b2-bb0e-4dd5-bda5-092040b1727f",
+    "aspect": "16:9"
+  },
+  {
+    "slug": "orlovski_1x1",
+    "id": "905fe03b-8e03-4263-b76f-e798d48cca81",
+    "aspect": "1:1"
+  },
+  {
+    "slug": "orlovski_16x9",
+    "id": "a5195a90-c862-43a9-b2c4-4af844110a9a",
+    "aspect": "16:9"
+  }
+]

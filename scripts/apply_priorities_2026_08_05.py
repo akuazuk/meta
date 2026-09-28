@@ -2,30 +2,16 @@
 """Apply Google Ads priorities 1-4 (2026-08-05). Baseline must exist first."""
 from __future__ import annotations
 
-import os
 import sys
-from pathlib import Path
 
-from dotenv import load_dotenv
-from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.protobuf import field_mask_pb2
 
-ROOT = Path(__file__).resolve().parents[1]
-load_dotenv(ROOT / ".env", override=True)
+from scripts.google_ads_client import customer_id, load_client, login_customer_id
 
-cid = os.environ["GOOGLE_ADS_CUSTOMER_ID"].strip().replace("-", "")
-login = os.environ["GOOGLE_ADS_LOGIN_CUSTOMER_ID"].strip().replace("-", "")
-client = GoogleAdsClient.load_from_dict(
-    {
-        "developer_token": os.environ["GOOGLE_ADS_DEVELOPER_TOKEN"].strip(),
-        "client_id": os.environ["GOOGLE_ADS_CLIENT_ID"].strip(),
-        "client_secret": os.environ["GOOGLE_ADS_CLIENT_SECRET"].strip(),
-        "refresh_token": os.environ["GOOGLE_ADS_REFRESH_TOKEN"].strip(),
-        "login_customer_id": login,
-        "use_proto_plus": True,
-    }
-)
+cid = customer_id()
+login = login_customer_id()
+client = load_client()
 
 ga = client.get_service("GoogleAdsService")
 shared_set_service = client.get_service("SharedSetService")

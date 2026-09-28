@@ -9,6 +9,7 @@ client_secret_*.json
 **/client_secret*.json
 google-ads.yaml
 .google_ads_credentials.json
+.youtube_token.json
 image/concepts/cut_*.png
 image/concepts/concept_*.jpg
 image/concepts/v[0-9]_*.jpg
@@ -19,3 +20,13 @@ image/brand/_logo_download.bin
 image/_logo.eps
 heygen/**/output/
 heygen/**/*.mp4
+*.mp4
+*.mov
+*.wav
+*.webm
+audio/
+image/concepts/video/**/*.jpg
+image/concepts/video/**/*.png
+image/concepts/video/**/*.mp3
+image/concepts/video/**/*.m4a
+image/concepts/video/final/Create OAuth client ID*

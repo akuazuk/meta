@@ -7,49 +7,35 @@
 
 from __future__ import annotations
 
-import os
-import sys
-from pathlib import Path
+import importlib.metadata
 
-from dotenv import load_dotenv
-from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-ROOT = Path(__file__).resolve().parents[1]
-load_dotenv(ROOT / ".env")
-
-REQUIRED = [
-    "GOOGLE_ADS_DEVELOPER_TOKEN",
-    "GOOGLE_ADS_CLIENT_ID",
-    "GOOGLE_ADS_CLIENT_SECRET",
-    "GOOGLE_ADS_REFRESH_TOKEN",
-    "GOOGLE_ADS_LOGIN_CUSTOMER_ID",
-    "GOOGLE_ADS_CUSTOMER_ID",
-]
+from scripts.google_ads_client import (
+    cloud_project_number,
+    customer_id as env_customer_id,
+    load_client,
+    login_customer_id as env_login_id,
+    missing_env,
+)
 
 
 def main() -> int:
-    missing = [k for k in REQUIRED if not (os.getenv(k) or "").strip()]
-    if missing:
-        print("[error] Не хватает в .env:", ", ".join(missing))
+    if missing_env():
+        print("[error] Не хватает в .env:", ", ".join(missing_env()))
         print("Инструкция: docs/GOOGLE_ADS_SETUP.md")
         return 1
 
-    customer_id = os.environ["GOOGLE_ADS_CUSTOMER_ID"].strip().replace("-", "")
-    login_id = os.environ["GOOGLE_ADS_LOGIN_CUSTOMER_ID"].strip().replace("-", "")
-    client = GoogleAdsClient.load_from_dict(
-        {
-            "developer_token": os.environ["GOOGLE_ADS_DEVELOPER_TOKEN"].strip(),
-            "client_id": os.environ["GOOGLE_ADS_CLIENT_ID"].strip(),
-            "client_secret": os.environ["GOOGLE_ADS_CLIENT_SECRET"].strip(),
-            "refresh_token": os.environ["GOOGLE_ADS_REFRESH_TOKEN"].strip(),
-            "login_customer_id": login_id,
-            "use_proto_plus": True,
-        }
-    )
+    customer_id = env_customer_id()
+    login_id = env_login_id()
+    client = load_client()
     ga = client.get_service("GoogleAdsService")
+    lib_ver = importlib.metadata.version("google-ads")
+    project = cloud_project_number()
 
     print("Проверка Google Ads API (только чтение)\n")
+    print(f"[info] google-ads {lib_ver}, developer-token header не отправляем")
+    print(f"[info] Cloud project number {project} (BASIC с 09.09.2026)")
     try:
         for batch in ga.search_stream(
             customer_id=customer_id,
@@ -106,12 +92,11 @@ def main() -> int:
     except GoogleAdsException as ex:
         print("[error] Google Ads API")
         for err in ex.failure.errors:
-            print(" ", err.message)
+            print(" ", err.error_code, err.message)
         print("\nСм. docs/GOOGLE_ADS_SETUP.md")
         return 2
 
-    print("\nДоступ на чтение OK. Создание/правка – через будущий контур mutate;")
-    print("права агентства на create/edit уже подтверждены ранее (validate_only).")
+    print("\nДоступ на чтение OK. Production-аккаунт отвечает – уровень не Test.")
     return 0
 
 

@@ -1,0 +1,21 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Montserrat ExtraBold,76,&HFFFFFF&,&HFFFFFF&,&H000000&,&H80000000&,0,0,0,0,100,100,1,0,1,7,4,2,30,30,150,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.35,0:00:01.01,Cap,,0,0,0,,{\fad(50,0)}{\c&H4AD2FF&}КАК {\c&HFFFFFF&}ВЕРЁВОЧКА\N{\c&HFFFFFF&}НЕ {\c&HFFFFFF&}ВЬЁТСЯ
+Dialogue: 0,0:00:01.01,0:00:01.49,Cap,,0,0,0,,{\fad(50,0)}{\c&HFFFFFF&}КАК {\c&H4AD2FF&}ВЕРЁВОЧКА\N{\c&HFFFFFF&}НЕ {\c&HFFFFFF&}ВЬЁТСЯ
+Dialogue: 0,0:00:01.49,0:00:01.67,Cap,,0,0,0,,{\fad(50,0)}{\c&HFFFFFF&}КАК {\c&HFFFFFF&}ВЕРЁВОЧКА\N{\c&H4AD2FF&}НЕ {\c&HFFFFFF&}ВЬЁТСЯ
+Dialogue: 0,0:00:01.67,0:00:02.39,Cap,,0,0,0,,{\fad(50,0)}{\c&HFFFFFF&}КАК {\c&HFFFFFF&}ВЕРЁВОЧКА\N{\c&HFFFFFF&}НЕ {\c&H4AD2FF&}ВЬЁТСЯ
+Dialogue: 0,0:00:02.39,0:00:02.51,Cap,,0,0,0,,{\fad(50,0)}{\c&H4AD2FF&}А {\c&HFFFFFF&}К {\c&HFFFFFF&}УРОЛОГУ\N{\c&HFFFFFF&}ПРИДЁТСЯ
+Dialogue: 0,0:00:02.51,0:00:02.57,Cap,,0,0,0,,{\fad(50,0)}{\c&HFFFFFF&}А {\c&H4AD2FF&}К {\c&HFFFFFF&}УРОЛОГУ\N{\c&HFFFFFF&}ПРИДЁТСЯ
+Dialogue: 0,0:00:02.57,0:00:03.05,Cap,,0,0,0,,{\fad(50,0)}{\c&HFFFFFF&}А {\c&HFFFFFF&}К {\c&H4AD2FF&}УРОЛОГУ\N{\c&HFFFFFF&}ПРИДЁТСЯ
+Dialogue: 0,0:00:03.05,0:00:04.60,Cap,,0,0,0,,{\fad(50,0)}{\c&HFFFFFF&}А {\c&HFFFFFF&}К {\c&HFFFFFF&}УРОЛОГУ\N{\c&H4AD2FF&}ПРИДЁТСЯ

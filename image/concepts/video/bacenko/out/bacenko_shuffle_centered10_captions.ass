@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1088
+PlayResY: 1904
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Main,Arial Black,92,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,1,0,1,7,2,8,48,48,118,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.85,Main,,0,0,0,,{\fad(90,110)\fscx106\fscy106\t(0,160,\fscx100\fscy100)}ПРИЁМ {\c&H0000FFFF&}ОКОНЧЕН
+Dialogue: 0,0:00:03.00,0:00:06.30,Main,,0,0,0,,{\fad(90,110)\fscx106\fscy106\t(0,160,\fscx100\fscy100)}ВСЕ {\c&H0000FFFF&}ЗДОРОВЫ
+Dialogue: 0,0:00:06.50,0:00:09.90,Main,,0,0,0,,{\fad(90,110)\fscx106\fscy106\t(0,160,\fscx100\fscy100)}А ДОКТОР — В {\c&H0000FFFF&}РИТМЕ
