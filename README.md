@@ -1,7 +1,9 @@
 # Meta Ads + Google Ads – интеграции
 
-**Другому агенту:** сначала [`AGENTS.md`](AGENTS.md) – как устроен проект,
-вакансии, события и **где лежат все ключи**. Секреты в Git не хранятся.
+**Другому агенту:** сначала [`AGENTS.md`](AGENTS.md) – раздел
+«Завтра: другой агент, доступ к ключам». Секреты в Git нет: собрать `.env`
+из Secret Manager (`bash scripts/pull_env_from_sm.sh`), аккаунт
+`aicoursesus@gmail.com`, проект `protocol-home-e1`.
 
 Программное управление рекламой Meta и Google Ads (агентство → клиенты),
 плюс серверное отслеживание конверсий Meta (CAPI). Для Meta реализованы
@@ -37,12 +39,14 @@ scripts/
 
 ```bash
 git pull
-cd meta
+cd meta   # если клон лежит как akuazuk/meta – это уже корень
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-# скопировать .env с рабочей машины (не в Git) или заполнить по .env.example
+gcloud config set project protocol-home-e1
+bash scripts/pull_env_from_sm.sh
 chmod 600 .env
+python -m scripts.verify_sm_access --env .env
 python -m scripts.verify_google_ads
 python -m scripts.diagnose_blockers
 ```

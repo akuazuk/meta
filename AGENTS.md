@@ -6,6 +6,68 @@
 
 Секреты в Git не класть. Значения токенов – только на машине, см. [§ Ключи](#ключи-доступа).
 
+## Завтра: другой агент, доступ к ключам
+
+Сказать агенту: **прочитай `AGENTS.md` и собери `.env` из Secret Manager.**
+
+Секреты не в Git. Источник истины – GCP Secret Manager, проект `protocol-home-e1`.
+Читать их может только Google-аккаунт **`aicoursesus@gmail.com`** (owner) и
+сервисный аккаунт VM `protocol-app`.
+
+### Тот же Мак (Cursor на этой машине)
+
+`gcloud` уже залогинен как `aicoursesus@gmail.com`. Если `.env` на месте – ключи
+уже есть. Если файла нет или он пустой:
+
+```bash
+cd /Users/pavelkuzauka/Cursor_Folders/Meta/meta
+git pull
+gcloud auth list --filter=status:ACTIVE --format='value(account)'
+# должно быть aicoursesus@gmail.com
+gcloud config set project protocol-home-e1
+bash scripts/pull_env_from_sm.sh
+chmod 600 .env
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python -m scripts.verify_sm_access --env .env
+```
+
+### Другой компьютер
+
+1. Войти в Google как **`aicoursesus@gmail.com`** (не другой Gmail).
+2. Установить [gcloud CLI](https://cloud.google.com/sdk/docs/install).
+3. Затем:
+
+```bash
+gcloud auth login
+gcloud auth application-default login
+gcloud config set project protocol-home-e1
+git clone https://github.com/akuazuk/meta.git
+cd meta
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+bash scripts/pull_env_from_sm.sh
+chmod 600 .env
+python -m scripts.verify_sm_access --env .env
+```
+
+Ожидание проверки: Meta MRS (`me` / пиксель / аккаунт), Meta OLD, Google Ads,
+HeyGen `v3/users/me` – все `ok`. Значения токенов в чат не печатать.
+
+### Что агент ещё не получит из SM
+
+Нужен отдельный логин в Cursor / браузере на той машине:
+
+- Higgsfield MCP и CLI (`~/.config/higgsfield/`)
+- HeyGen / Artlist MCP (OAuth Cursor)
+- Gmail, Calendar, Drive, Sheets, Docs, Google Business
+- GTM (`GTM-59QGB4V`) – только браузер
+
+Meta Ads MCP после `.env` заработает: `scripts/run_meta_ads_mcp.sh` читает
+`META_ACCESS_TOKEN_MRS`.
+
+Не вызывать `push_secrets_to_sm.sh`, если не меняли ключи.
+
 ## Что это
 
 Программное управление рекламой **Meta (аккаунт MRS / USD)** и **Google Ads**,
@@ -114,7 +176,18 @@ Cursor MCP Meta Ads: `scripts/run_meta_ads_mcp.sh` (берёт `META_ACCESS_TOKE
 
 ## Ключи доступа
 
-Секреты **не в Git**. На другой машине копируют файлы ниже или проходят OAuth заново.
+Секреты **не в Git**. Источник истины – **Secret Manager** проекта `protocol-home-e1`
+(как в Протоколе). Локальный `.env` собирается оттуда.
+
+```bash
+bash scripts/push_secrets_to_sm.sh          # залить allowlist из .env в SM
+bash scripts/pull_env_from_sm.sh            # собрать meta/.env из SM
+bash scripts/pull_env_from_sm.sh --check    # сверка набора ключей
+python -m scripts.verify_sm_access --env .env
+```
+
+На GCE модерация комментов больше не копирует `.env` с Мака:
+`scripts/assemble_comments_env_from_sm.sh` собирает `/opt/kravira-meta-comments/.env`.
 
 ### 1. Главный файл – `meta/.env`
 

@@ -25,35 +25,14 @@ echo "[2] sync code"
 gcloud compute scp --zone="$ZONE" --recurse --quiet \
   "$ROOT/src/comment_moderation" "$VM:$REMOTE/src/"
 
-echo "[3] env + SA (not printed)"
-# shellcheck disable=SC1091
-set -a
-source "$ROOT/.env"
-set +a
-ENV_TMP="$(mktemp)"
-python3 - <<PY >"$ENV_TMP"
-import os
-keys = [
-    "META_ACCESS_TOKEN_MRS", "META_AD_ACCOUNT_ID_MRS", "META_PAGE_ID",
-    "META_INSTAGRAM_ID", "META_GRAPH_API_VERSION",
-]
-print("GOOGLE_SHEETS_ID=1LkaVoEZ7hQWR2FL0Iejjviutdte91SLq9rM7W5u80lU")
-print("GOOGLE_APPLICATION_CREDENTIALS=/opt/kravira-meta-comments/service-account.json")
-print("COMMENT_SINCE=2026-09-01")
-print("TZ=Europe/Minsk")
-print("GOOGLE_CLOUD_PROJECT=protocol-home-e1")
-print("GEMINI_MODEL=gemini-2.5-flash")
-print("GEMINI_LOCATION=europe-west1")
-print("COMMENT_USE_GEMINI=1")
-for k in keys:
-    v = os.environ.get(k, "")
-    if v:
-        print(f"{k}={v}")
-PY
-gcloud compute scp --zone="$ZONE" --quiet "$ENV_TMP" "$VM:$REMOTE/.env"
+echo "[3] env from Secret Manager + SA (values not printed)"
+gcloud compute scp --zone="$ZONE" --quiet \
+  "$ROOT/scripts/assemble_comments_env_from_sm.sh" \
+  "$VM:/tmp/assemble_comments_env_from_sm.sh"
 gcloud compute scp --zone="$ZONE" --quiet "$SA_SRC" "$VM:$REMOTE/service-account.json"
-rm -f "$ENV_TMP"
-ssh "chmod 600 '$REMOTE/.env' '$REMOTE/service-account.json'"
+ssh "chmod 700 /tmp/assemble_comments_env_from_sm.sh
+COMMENTS_ENV='$REMOTE/.env' bash /tmp/assemble_comments_env_from_sm.sh
+chmod 600 '$REMOTE/service-account.json'"
 
 echo "[4] venv + deps"
 ssh "python3 -m venv '$REMOTE/.venv' 2>/dev/null || true
