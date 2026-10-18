@@ -129,6 +129,8 @@ Cursor MCP Meta Ads: `scripts/run_meta_ads_mcp.sh` (берёт `META_ACCESS_TOKE
 
 ## Вакансии (актуально 30.09.2026)
 
+Срез 18.10.2026, включая храп Ярового и кампанию «Хирургия», лежит в `docs/ADS_2026-10-18_HANDOFF.md`. Кампания вакансий в тот день на паузе. Включать вакансии только по будущим неделям медиаплана. Таблица ниже – снимок 30.09 и может расходиться с кабинетом.
+
 Оптимизация рабочих групп: пиксель `1064023126171171` + событие **`MRS_FB_hr`**.
 
 ```json
@@ -276,6 +278,7 @@ MCP Higgsfield для баланса не использовать как ист
 | Google Ads доступ | `docs/GOOGLE_ADS_SETUP.md` |
 | Креативы Meta | `docs/CREATIVE_CAMPAIGN_RUNBOOK.md` |
 | HeyGen (без генерации) | `docs/HEYGEN_OSIPENKO_HANDOFF.md` |
+| Meta на 18.10.2026 | `docs/ADS_2026-10-18_HANDOFF.md` |
 | Баценко видео | `.cursor/rules/bacenko-video.mdc` |
 
 ## Типичные команды
