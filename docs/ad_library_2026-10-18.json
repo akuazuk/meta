@@ -651,5 +651,22 @@
       "",
       "Лента больше не ссылается на вертикальный файл"
     ]
-  ]
+  ],
+  "sheets": {
+    "spreadsheet_id": "1m1JcLeHNc6u5xRHGssjm2WA3BkCis03DYEb3pCALuDE",
+    "url": "https://docs.google.com/spreadsheets/d/1m1JcLeHNc6u5xRHGssjm2WA3BkCis03DYEb3pCALuDE/edit",
+    "verified": "2026-10-18",
+    "tabs": [
+      "Справочник",
+      "Библиотека",
+      "Meta",
+      "Google",
+      "TikTok",
+      "Яндекс",
+      "Правила"
+    ],
+    "library_rows": 31,
+    "meta_rows": 7,
+    "list1_preserved": true
+  }
 }
