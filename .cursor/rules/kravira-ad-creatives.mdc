@@ -15,21 +15,12 @@ alwaysApply: true
 
 ## Эталон стиля
 
-- Визуальный эталон: финальные креативы `image/concepts/final_*.jpg` (стиль серии v2).
-- Сохранять: мятный фон с боке, врач справа, текст слева, телефон `403` слева внизу, одна teal pill-CTA.
-- Не ухудшать фото/композицию «самодельными» cutout-сборками, если эталон уже хороший.
-
-## Логотип
-
-- Для текущей рекламной серии использовать официальный знак:
-  `image/logo_circle.png`.
-- Размещать знак в свободной верхней области как фоновый watermark с
-  прозрачностью 16%.
-- Watermark не должен перекрывать врача, текст, CTA или телефон `403`.
-- Для других форматов, где нужен полный словесный знак, использовать
-  `image/brand/logo_transparent.png` строго с альфа-каналом.
-- Не рисовать логотип нейросетью.
-- `image/_logo.eps` невалиден (AppleDouble) – не использовать, пока не будет настоящего `.eps/.svg/.pdf`.
+Баннеры врачей и услуг собираются по правилу `meta-service-banners.mdc`
+и скрипту `scripts/build_service_banners.py`. Эталон – файлы в Drive
+«Врачи и услуги» (Яровой, Ладыгин): полный логотип справа сверху, три
+блока текста, полоса с `403`, на вертикали карточка имени. Логотип не
+рисовать нейросетью и не класть кружок `image/logo_circle.png` водяным
+знаком 16%.
 
 ## Типографика
 
@@ -83,12 +74,9 @@ alwaysApply: true
 - История блокеров: `docs/HANDOFF_BLOCKERS.md`.
 ## Как собраны изображения
 
-- Источник: утверждённые макеты из `image/brand/sources/`.
-- Сборка: `python -m scripts.build_ad_banners`.
-- Композиция нормализуется до `1080×1080`.
-- Официальный знак добавляется как фоновый watermark.
-- Финальные JPEG сохраняются с quality 95 без chroma subsampling.
-- Полный процесс: `docs/CREATIVE_CAMPAIGN_RUNBOOK.md`.
+- Врачи и услуги: `scripts/build_service_banners.py` и правило `meta-service-banners.mdc`.
+- Старые общие макеты v2: `python -m scripts.build_ad_banners` только для `final_*.jpg`.
+- Финальные JPEG: quality 95, без chroma subsampling.
 
 ## Файлы в репозитории
 
@@ -98,6 +86,7 @@ alwaysApply: true
 - `image/concepts/final_2_health.jpg`
 - `image/concepts/final_3_hear.jpg`
 - `image/brand/logo_transparent.png` (+ `@2x` при необходимости)
+- `image/brand/phone_403.png`
 - `image/logo_1.PNG`, `image/logo_circle.png`
 - `assets/fonts/Montserrat-*.ttf`
 
